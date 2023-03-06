@@ -1,5 +1,10 @@
 name: Deploy CDK Stack Reusable Workflow
 
+on:
+  push:
+    branches:
+      - main
+      
 inputs:
   aws-access-key-id:
     description: 'The ID of the AWS user'
