@@ -1,18 +1,19 @@
 name: Deploy CDK Stack Reusable Workflow
 
-on: [workflow_call]
-
-inputs:
-  aws-access-key-id:
-    description: 'The ID of the AWS user'
-    required: true
-  aws-secret-access-key:
-    description: 'The Secret Key of the AWS user'
-    required: true
-  aws-region:
-    description: 'AWS deployment region'
-    required: true
-
+on: 
+  workflow_call: # enables this workflow to be reusable for other repo
+    inputs:
+      aws-region:
+        description: 'AWS deployment region'
+        required: true
+    secrets:
+      aws-access-key-id:
+        description: 'The ID of the AWS user'
+        required: true
+      aws-secret-access-key:
+        description: 'The Secret Key of the AWS user'
+        required: true
+      
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -30,8 +31,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          npm install -g aws-cdk
-          npm install aws-cdk-lib
+          npm install
 
       - name: Run Tests
         run: |
