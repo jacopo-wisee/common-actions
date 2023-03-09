@@ -7,6 +7,10 @@ on:
         description: 'AWS deployment region'
         type: string
         required: true
+      project-stage:
+        description: 'Project stage'
+        type: string
+        required: true
     secrets:
       aws-access-key-id:
         description: 'The ID of the AWS user'
@@ -41,3 +45,5 @@ jobs:
       - name: Deploy CDK stack
         run: |
           npx cdk deploy --require-approval never
+        env: 
+          PROJECT_STAGE: ${{ inputs.project-stage }}
